@@ -2,14 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeypadTrigger : MonoBehaviour
+public class KeypadTrigger : Puzzle
 {
-    [SerializeField] private string _codeToUnlock = "0000";
-    [SerializeField] private GameObject _doorToOpen;
-
-    private bool _canInteract = false;
-    private bool _doorOpened = false;
-
     void OnEnable()
     {
         Keypad._OnCorrectCodeEntered += OpenDoor;
@@ -24,21 +18,10 @@ public class KeypadTrigger : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    public override void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Player")
-        {
-            _canInteract = true;            
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.tag == "Player")
-        {
-            _canInteract = false;
-            UIManager.Instance.HideKeypadUI();
-        }
+        base.OnTriggerExit2D(other);
+        UIManager.Instance.HideKeypadUI();
     }
 
     void SendCodeToKeypad()
@@ -46,11 +29,9 @@ public class KeypadTrigger : MonoBehaviour
         Keypad.Instance.SetCode(_codeToUnlock);
     }
 
-    void OpenDoor()
+    public override void OpenDoor()
     {
-        Debug.Log("Destroying Door");
-        Destroy(_doorToOpen);
-        _doorOpened = true;
+        base.OpenDoor();
         UIManager.Instance.HideKeypadUI();
     }
 
