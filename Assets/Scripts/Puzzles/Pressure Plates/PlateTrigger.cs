@@ -19,11 +19,6 @@ public class PlateTrigger : Puzzle
         Plate.onPlateChanged += SetEnteredCode;
     }
 
-    void Update()
-    {
-
-    }
-
     public override void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Player")
@@ -45,6 +40,7 @@ public class PlateTrigger : Puzzle
                 {
                     _codeEntered += plateScript.plateNumber;
                     plateScript._addedPlateToCode = true;
+                    AudioManager.Instance.PlaySound(_correctSoundClip);
                 }
             }
         }
@@ -64,9 +60,6 @@ public class PlateTrigger : Puzzle
             else
             {
                 Debug.Log("Correct Plate");
-
-                //TODO fix sound playing when plates active
-                AudioManager.Instance.PlaySound(_correctSoundClip);
                 CheckCodeIfMatch();
             }
         }

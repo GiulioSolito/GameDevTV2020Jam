@@ -80,4 +80,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  _correctSoundClip: {fileID: 8300000, guid: 4fb13c7be1a7e1e4185dcbb3f15d81bf, type: 3}
+  _inCorrectSoundClip: {fileID: 8300000, guid: b03fb406e757ba344847c616b0211923, type: 3}
   _codeSolved: 0
