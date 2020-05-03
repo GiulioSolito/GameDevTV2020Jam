@@ -32,6 +32,7 @@ public class KeypadTrigger : Puzzle
     public override void OpenDoor()
     {
         base.OpenDoor();
+        Debug.Log("Correct code entered! Opening Door");
         UIManager.Instance.HideKeypadUI();
     }
 

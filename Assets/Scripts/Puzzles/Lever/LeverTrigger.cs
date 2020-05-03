@@ -7,6 +7,9 @@ public class LeverTrigger : Puzzle
 {
     [SerializeField] private GameObject[] _levers;
 
+    [SerializeField] private AudioClip _correctSoundClip;
+    [SerializeField] private AudioClip _inCorrectSoundClip;
+
     void OnEnable()
     {
         Lever.onLeverChanged += SetEnteredCode;
@@ -19,11 +22,6 @@ public class LeverTrigger : Puzzle
             Debug.Log("Correct lever order: Openening Door");
             OpenDoor();
         }
-    }
-
-    public override void OnTriggerEnter2D(Collider2D other)
-    {
-        base.OnTriggerEnter2D(other);
     }
 
     public override void OnTriggerExit2D(Collider2D other)
@@ -54,7 +52,30 @@ public class LeverTrigger : Puzzle
                     _codeEntered += leverValue;
                 }
             }
-        }        
+        }
+        CompareCodesAndCheckIfCorrect();
+    }
+
+    void CompareCodesAndCheckIfCorrect()
+    {
+        for (int i = 0; i < _codeEntered.Length; i++)
+        {
+
+            if (_codeEntered[i] != _codeToUnlock[i])
+            {
+                _levers[i].GetComponent<Lever>().isCorrectPosition = false;
+                Debug.Log("Incorrect Lever");
+                //TODO: Play incorrect sound clip            
+                AudioManager.Instance.PlaySound(_inCorrectSoundClip);
+            }
+            else
+            {
+                _levers[i].GetComponent<Lever>().isCorrectPosition = true;
+                Debug.Log("Correct Lever");
+                //TODO: Play correct sound clip
+                AudioManager.Instance.PlaySound(_correctSoundClip);
+            }
+        }
     }
 
     void OnDisable()

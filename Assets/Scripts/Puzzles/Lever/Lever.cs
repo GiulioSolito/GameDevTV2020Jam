@@ -7,6 +7,9 @@ public class Lever : MonoBehaviour
     public bool _isFlippedOn = false;
     private bool _canInteract = false;
 
+    public int leverIndex;
+    public bool isCorrectPosition;
+
     public delegate void OnLeverChanged();
     public static event OnLeverChanged onLeverChanged;
 
