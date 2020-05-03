@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Puzzle : MonoBehaviour
+public abstract class Puzzle : MonoBehaviour
 {
     [SerializeField] protected string _codeToUnlock = "0000";
     [SerializeField] protected string _codeEntered;
@@ -29,11 +29,10 @@ public class Puzzle : MonoBehaviour
 
     public virtual void OpenDoor()
     {
-        Debug.Log("Destroying Door");
-
         if (_doorToOpen != null)
         {
             Destroy(_doorToOpen);
+            Destroy(gameObject);
         }
 
         _doorOpened = true;        
