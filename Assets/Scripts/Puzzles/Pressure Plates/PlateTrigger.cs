@@ -7,7 +7,12 @@ public class PlateTrigger : Puzzle
 {
     [SerializeField] private GameObject[] _plates;
 
+    [SerializeField] private AudioClip _correctSoundClip;
+    [SerializeField] private AudioClip _inCorrectSoundClip;
+
     [SerializeField] private bool _codeSolved = false;                                      //TODO: make private later
+
+    private Plate plateScript;
 
     void OnEnable()
     {
@@ -16,12 +21,7 @@ public class PlateTrigger : Puzzle
 
     void Update()
     {
-        if (_codeEntered == _codeToUnlock)
-        {
-            Debug.Log("Correct plate order: Openening Door");
-            _codeSolved = true;
-            OpenDoor();
-        }
+
     }
 
     public override void OnTriggerExit2D(Collider2D other)
@@ -37,7 +37,7 @@ public class PlateTrigger : Puzzle
     {
         foreach (var plate in _plates)
         {
-            Plate plateScript = plate.GetComponent<Plate>();
+            plateScript = plate.GetComponent<Plate>();
 
             if (plateScript != null)
             {
@@ -58,12 +58,27 @@ public class PlateTrigger : Puzzle
             if (_codeEntered[i] != _codeToUnlock[i])
             {
                 Debug.Log("Incorrect Plate");
+                AudioManager.Instance.PlaySound(_inCorrectSoundClip);
                 ResetPlates();
             }
             else
             {
                 Debug.Log("Correct Plate");
+
+                //TODO fix sound playing when plates active
+                AudioManager.Instance.PlaySound(_correctSoundClip);
+                CheckCodeIfMatch();
             }
+        }
+    }
+
+    void CheckCodeIfMatch()
+    {
+        if (_codeEntered == _codeToUnlock)
+        {
+            Debug.Log("Correct plate order: Openening Door");
+            _codeSolved = true;
+            OpenDoor();
         }
     }
 

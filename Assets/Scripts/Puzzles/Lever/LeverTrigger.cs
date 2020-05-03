@@ -6,6 +6,7 @@ using UnityEngine;
 public class LeverTrigger : Puzzle
 {
     [SerializeField] private GameObject[] _levers;
+    private List<Lever> leverScripts;
 
     [SerializeField] private AudioClip _correctSoundClip;
     [SerializeField] private AudioClip _inCorrectSoundClip;
@@ -13,14 +14,12 @@ public class LeverTrigger : Puzzle
     void OnEnable()
     {
         Lever.onLeverChanged += SetEnteredCode;
-    }
 
-    void Update()
-    {
-        if (_codeEntered == _codeToUnlock)
+        leverScripts = new List<Lever>();
+        for (int i = 0; i < _levers.Length; i++)
         {
-            Debug.Log("Correct lever order: Openening Door");
-            OpenDoor();
+            leverScripts.Add(_levers[i].GetComponent<Lever>());
+            leverScripts[i].SetUp(i, _codeToUnlock[i] == '1');
         }
     }
 
@@ -33,48 +32,38 @@ public class LeverTrigger : Puzzle
         }
     }
 
-    public void SetEnteredCode()
+    public void SetEnteredCode(int index)
     {
-        foreach (var lever in _levers)
+        string entered = "";
+        foreach (var leverScript in leverScripts)
         {
-            Lever leverScript = lever.GetComponent<Lever>();
-            int leverValue = Convert.ToInt32(leverScript._isFlippedOn);
-
-            if (leverScript != null)
-            {
-                if (_codeEntered.Length < _levers.Length)
-                {
-                    _codeEntered += leverValue;
-                }
-                else
-                {
-                    _codeEntered = "";
-                    _codeEntered += leverValue;
-                }
-            }
+            entered += Convert.ToInt32(leverScript._isFlippedOn);
         }
-        CompareCodesAndCheckIfCorrect();
+        _codeEntered = entered;
+        CompareCodesAndCheckIfCorrect(index);
     }
 
-    void CompareCodesAndCheckIfCorrect()
+    void CompareCodesAndCheckIfCorrect(int index)
     {
-        for (int i = 0; i < _codeEntered.Length; i++)
+        if (leverScripts[index].IsCorrect())
         {
+            Debug.Log("Incorrect Lever");
+            AudioManager.Instance.PlaySound(_inCorrectSoundClip);
+        }
+        else
+        {
+            Debug.Log("Correct Lever");
+            AudioManager.Instance.PlaySound(_correctSoundClip);
+            CheckCodeIfMatch();
+        }
+    }
 
-            if (_codeEntered[i] != _codeToUnlock[i])
-            {
-                _levers[i].GetComponent<Lever>().isCorrectPosition = false;
-                Debug.Log("Incorrect Lever");
-                //TODO: Play incorrect sound clip            
-                AudioManager.Instance.PlaySound(_inCorrectSoundClip);
-            }
-            else
-            {
-                _levers[i].GetComponent<Lever>().isCorrectPosition = true;
-                Debug.Log("Correct Lever");
-                //TODO: Play correct sound clip
-                AudioManager.Instance.PlaySound(_correctSoundClip);
-            }
+    void CheckCodeIfMatch()
+    {
+        if (_codeEntered == _codeToUnlock)
+        {
+            Debug.Log("Correct lever order: Openening Door");
+            OpenDoor();
         }
     }
 

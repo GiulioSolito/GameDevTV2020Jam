@@ -301,8 +301,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isFlippedOn: 0
-  leverIndex: 0
-  isCorrectPosition: 0
 --- !u!1 &245683943
 GameObject:
   m_ObjectHideFlags: 0
@@ -1656,8 +1654,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isFlippedOn: 0
-  leverIndex: 0
-  isCorrectPosition: 0
 --- !u!1 &1651753710
 GameObject:
   m_ObjectHideFlags: 0
@@ -2182,8 +2178,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isFlippedOn: 0
-  leverIndex: 0
-  isCorrectPosition: 0
 --- !u!1 &2129548074 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4961736386785508421, guid: 11a5cbfce7798a44ba92c3122a220a7d,
@@ -2745,6 +2739,16 @@ PrefabInstance:
       propertyPath: _plates.Array.data[5]
       value: 
       objectReference: {fileID: 564969295}
+    - target: {fileID: 7579618805245617925, guid: ac34dadb8568ba24e8db8d93c83e9fe0,
+        type: 3}
+      propertyPath: _correctSoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4fb13c7be1a7e1e4185dcbb3f15d81bf, type: 3}
+    - target: {fileID: 7579618805245617925, guid: ac34dadb8568ba24e8db8d93c83e9fe0,
+        type: 3}
+      propertyPath: _inCorrectSoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b03fb406e757ba344847c616b0211923, type: 3}
     - target: {fileID: 7579618805245617926, guid: ac34dadb8568ba24e8db8d93c83e9fe0,
         type: 3}
       propertyPath: m_Name
