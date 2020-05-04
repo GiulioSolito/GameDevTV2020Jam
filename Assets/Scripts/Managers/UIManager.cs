@@ -1,12 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using TMPro;
 
 public class UIManager : MonoSingleton<UIManager>
 {
     [SerializeField] private TextMeshProUGUI _timeText;
     [SerializeField] private GameObject _keyPadUI;
+    [SerializeField] private GameObject _pauseMenu;
+    [SerializeField] private GameObject _optionsMenu;
+
+    public delegate void OnResumeButtonClicked();
+    public static event OnResumeButtonClicked onResumeButtonClicked;
+
+    void OnEnable()
+    {
+        PlayerController.onPauseGame += ShowPauseMenu;
+        PlayerController.onResumeGame += HidePauseMenu;
+    }
 
     public void UpdateTimeTextUI(int time)
     {
@@ -21,5 +33,50 @@ public class UIManager : MonoSingleton<UIManager>
     public void HideKeypadUI()
     {
         _keyPadUI.SetActive(false);
+    }
+
+    #region Pause Menu
+    void ShowPauseMenu()
+    {
+        _pauseMenu.SetActive(true);
+    }
+    
+    void HidePauseMenu()
+    {
+        _pauseMenu.SetActive(false);
+    }
+
+    public void ResumeGame()
+    {
+        if (onResumeButtonClicked != null)
+        {
+            onResumeButtonClicked();
+        }
+    }
+
+    public void Options()
+    {
+        _optionsMenu.SetActive(true);
+    }
+
+    public void Done()
+    {
+        _optionsMenu.SetActive(false);
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+
+        Application.Quit();
+    }
+    #endregion
+
+    void OnDisable()
+    {
+        PlayerController.onPauseGame -= ShowPauseMenu;
+        PlayerController.onResumeGame -= HidePauseMenu;
     }
 }

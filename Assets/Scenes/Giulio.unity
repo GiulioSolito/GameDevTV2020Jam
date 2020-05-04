@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -431,6 +431,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &351980675 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 351980675, guid: 01e2489344e9eba4ab5ff87f1a2b3877,
+    type: 3}
+  m_PrefabInstance: {fileID: 5713618622294977175}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &480906037
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -647,6 +653,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &892435225 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 892435225, guid: 01e2489344e9eba4ab5ff87f1a2b3877,
+    type: 3}
+  m_PrefabInstance: {fileID: 5713618622294977175}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &901955333 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4961736386785508421, guid: 11a5cbfce7798a44ba92c3122a220a7d,
@@ -1597,6 +1609,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1817436982}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1876768843 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 496596452763143454, guid: e57aaaa822b305848a3576e307bcceba,
+    type: 3}
+  m_PrefabInstance: {fileID: 496596452652243958}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c03652f54e700b4aa34184ceaf72895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1975533729
 GameObject:
   m_ObjectHideFlags: 0
@@ -1769,6 +1793,22 @@ PrefabInstance:
       propertyPath: _keyPadUI
       value: 
       objectReference: {fileID: 17353277}
+    - target: {fileID: 496596452763143454, guid: e57aaaa822b305848a3576e307bcceba,
+        type: 3}
+      propertyPath: _pauseMenu
+      value: 
+      objectReference: {fileID: 351980675}
+    - target: {fileID: 496596452763143454, guid: e57aaaa822b305848a3576e307bcceba,
+        type: 3}
+      propertyPath: _mixer
+      value: 
+      objectReference: {fileID: 24100000, guid: ba0269ca6900fe4489117fab6332fd69,
+        type: 2}
+    - target: {fileID: 496596452763143454, guid: e57aaaa822b305848a3576e307bcceba,
+        type: 3}
+      propertyPath: _optionsMenu
+      value: 
+      objectReference: {fileID: 892435225}
     - target: {fileID: 496596452763143455, guid: e57aaaa822b305848a3576e307bcceba,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1987,11 +2027,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 1120275235761968897, guid: 4a94eb53d7ff3a146bb374ff3ecea06f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1120275235761968899, guid: 4a94eb53d7ff3a146bb374ff3ecea06f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2199,6 +2234,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 157920104, guid: 01e2489344e9eba4ab5ff87f1a2b3877, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1876768843}
+    - target: {fileID: 310554607, guid: 01e2489344e9eba4ab5ff87f1a2b3877, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1876768843}
+    - target: {fileID: 336485418, guid: 01e2489344e9eba4ab5ff87f1a2b3877, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1876768843}
+    - target: {fileID: 1991969604, guid: 01e2489344e9eba4ab5ff87f1a2b3877, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1876768843}
     - target: {fileID: 5713618621336870584, guid: 01e2489344e9eba4ab5ff87f1a2b3877,
         type: 3}
       propertyPath: m_LocalPosition.x

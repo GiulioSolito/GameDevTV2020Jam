@@ -11,6 +11,16 @@ public class PlayerController : MonoBehaviour
 
     public bool canMove = true;
 
+    public delegate void OnPauseGame();
+    public static event OnPauseGame onPauseGame;
+    public delegate void OnResumeGame();
+    public static event OnResumeGame onResumeGame;
+
+    void OnEnable()
+    {
+        UIManager.onResumeButtonClicked += ReenablePlayerMovement;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,5 +44,42 @@ public class PlayerController : MonoBehaviour
         {
             _rb.velocity = Vector2.zero;
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (canMove)
+            {
+                DisablePlayerMovement();
+            }
+            else
+            {
+                ReenablePlayerMovement();
+            }
+        }
+    }
+
+    void DisablePlayerMovement()
+    {
+        canMove = false;
+
+        if (onPauseGame != null)
+        {
+            onPauseGame();
+        }        
+    }
+
+    void ReenablePlayerMovement()
+    {
+        canMove = true;
+
+        if (onResumeGame != null)
+        {
+            onResumeGame();
+        }
+    }
+
+    void OnDisable()
+    {
+        UIManager.onResumeButtonClicked -= ReenablePlayerMovement;
     }
 }
