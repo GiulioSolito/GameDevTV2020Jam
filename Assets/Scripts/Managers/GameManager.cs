@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -9,18 +10,19 @@ public class GameManager : MonoSingleton<GameManager>
     private bool _decreaseTime = true;
     private bool _isGameOver = false;
 
+    void OnEnable()
+    {
+        PlayerController.onPauseGame += PauseGame;
+        PlayerController.onResumeGame += ResumeGame;
+        UIManager.onResumeButtonClicked += ResumeGame;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         UIManager.Instance.UpdateTimeTextUI(_timeRemaining);
 
         StartCoroutine(DecreaseTime());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     IEnumerator DecreaseTime()
@@ -40,5 +42,32 @@ public class GameManager : MonoSingleton<GameManager>
                 yield return new WaitForSeconds(1f);
             }            
         }
+    }
+
+    void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+
+    void ResumeGame()
+    {
+        Time.timeScale = 1;
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void LoadNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    void OnDisable()
+    {
+        PlayerController.onPauseGame -= PauseGame;
+        PlayerController.onResumeGame -= ResumeGame;
+        UIManager.onResumeButtonClicked -= ResumeGame;
     }
 }
