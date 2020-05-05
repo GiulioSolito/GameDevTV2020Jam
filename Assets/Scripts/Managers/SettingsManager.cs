@@ -4,10 +4,17 @@ using UnityEngine;
 using UnityEngine.Audio;
 using TMPro;
 using System.Linq;
-public class SettingsManager : MonoBehaviour
+using UnityEngine.Rendering;
+using UnityEngine.UI;
+
+public class SettingsManager : MonoSingleton<SettingsManager>
 {
     [SerializeField] private AudioMixer _mixer;
     [SerializeField] private TMP_Dropdown _resoultionDropdown;
+
+    [SerializeField] private Slider _masterSlider;
+    [SerializeField] private Slider _musicSlider;
+    [SerializeField] private Slider _sfxSlider;
 
     private List<Resolution> _resolutions;
 
@@ -35,6 +42,26 @@ public class SettingsManager : MonoBehaviour
         _resoultionDropdown.AddOptions(options);
         _resoultionDropdown.value = currentResolutionIndex;
         _resoultionDropdown.RefreshShownValue();
+
+        float masterVol = PlayerPrefs.GetFloat("masterVolume");
+        float musicVol = PlayerPrefs.GetFloat("bgmVolume");
+        float sfxVol = PlayerPrefs.GetFloat("sfxVolume");
+
+        if (PlayerPrefs.HasKey("masterVolume"))
+        {
+            SetMasterVolume(masterVol);
+            _masterSlider.value = masterVol;
+        }
+        if (PlayerPrefs.HasKey("bgmVolume"))
+        {
+            SetMusicVolume(musicVol);
+            _musicSlider.value = musicVol;
+        }
+        if (PlayerPrefs.HasKey("sfxVolume"))
+        {
+            SetSFXVolume(sfxVol);
+            _sfxSlider.value = sfxVol;
+        }
     }
 
     public void SetResolution(int resolutionIndex)
@@ -46,16 +73,19 @@ public class SettingsManager : MonoBehaviour
     public void SetMasterVolume(float volume)
     {
         _mixer.SetFloat("masterVolume", volume);
+        PlayerPrefs.SetFloat("masterVolume", volume);
     }
 
     public void SetMusicVolume(float volume)
     {
         _mixer.SetFloat("bgmVolume", volume);
+        PlayerPrefs.SetFloat("bgmVolume", volume);
     }
 
     public void SetSFXVolume(float volume)
     {
         _mixer.SetFloat("sfxVolume", volume);
+        PlayerPrefs.SetFloat("sfxVolume", volume);
     }
 
     public void SetFullscreen(bool isFullscreen)

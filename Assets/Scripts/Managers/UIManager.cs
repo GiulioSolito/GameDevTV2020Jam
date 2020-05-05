@@ -18,6 +18,7 @@ public class UIManager : MonoSingleton<UIManager>
     {
         PlayerController.onPauseGame += ShowPauseMenu;
         PlayerController.onResumeGame += HidePauseMenu;
+        PlayerController.onResumeGame += HideOptionsMenu;
     }
 
     public void UpdateTimeTextUI(int time)
@@ -59,6 +60,11 @@ public class UIManager : MonoSingleton<UIManager>
         _optionsMenu.SetActive(true);
     }
 
+    void HideOptionsMenu()
+    {
+        _optionsMenu.SetActive(false);
+    }
+
     public void Done()
     {
         _optionsMenu.SetActive(false);
@@ -78,5 +84,6 @@ public class UIManager : MonoSingleton<UIManager>
     {
         PlayerController.onPauseGame -= ShowPauseMenu;
         PlayerController.onResumeGame -= HidePauseMenu;
+        PlayerController.onResumeGame -= HideOptionsMenu;
     }
 }

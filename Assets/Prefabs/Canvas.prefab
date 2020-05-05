@@ -5085,6 +5085,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mixer: {fileID: 24100000, guid: ba0269ca6900fe4489117fab6332fd69, type: 2}
   _resoultionDropdown: {fileID: 351331950}
+  _masterSlider: {fileID: 371751134}
+  _musicSlider: {fileID: 1026526243}
+  _sfxSlider: {fileID: 1940219572}
 --- !u!1 &5713618622130746080
 GameObject:
   m_ObjectHideFlags: 0
