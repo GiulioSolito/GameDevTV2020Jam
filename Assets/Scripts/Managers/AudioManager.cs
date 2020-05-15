@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoSingleton<AudioManager>
@@ -19,5 +20,14 @@ public class AudioManager : MonoSingleton<AudioManager>
         _audio.Play();
     }
 
+    public void StopSound()
+    {
+        _audio.Stop();
+    }
 
+    public void PlayFootstepSound(AudioClip[] footsteps, int clipToPlay)
+    {
+        _audio.clip = footsteps[clipToPlay];
+        _audio.Play();
+    }
 }
