@@ -1,13 +1,18 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float _speed = 10f;
+    [SerializeField] private AudioClip[] _footsteps;
 
     private Rigidbody2D _rb;
     private Animator _anim;
+    private Vector2 _lookDirection;
+    private AudioSource _audio;
 
     public bool canMove = true;
 
@@ -25,8 +30,9 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        //_anim = GetComponent<Animator>();
-
+        _anim = GetComponent<Animator>();
+        _lookDirection = new Vector2(0, -1);
+        _audio = GetComponent<AudioSource>();
         if (_rb == null)
         {
             Debug.LogError("The Player Rigidbody is NULL.");
@@ -38,7 +44,22 @@ public class PlayerController : MonoBehaviour
     {
         if (canMove)
         {
-            _rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * _speed;
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
+
+            Vector2 move = new Vector2(horizontal, vertical);
+            if (!Mathf.Approximately(move.x, 0.0f) ||
+                !Mathf.Approximately(move.y, 0.0f))
+            {
+                _lookDirection.Set(move.x, move.y);
+                _lookDirection.Normalize();
+                AudioManager.Instance.PlaySound(_footsteps[Random.Range(0, _footsteps.Length)]);
+            }
+
+            _anim.SetFloat("Look X", _lookDirection.x);
+            _anim.SetFloat("Look Y", _lookDirection.y);
+            _anim.SetFloat("Speed", move.magnitude);
+            _rb.velocity = new Vector2(horizontal, vertical) * _speed;           
         }
         else
         {

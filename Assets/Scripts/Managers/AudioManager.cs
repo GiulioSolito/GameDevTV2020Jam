@@ -18,4 +18,6 @@ public class AudioManager : MonoSingleton<AudioManager>
         _audio.clip = clip;
         _audio.Play();
     }
+
+
 }
