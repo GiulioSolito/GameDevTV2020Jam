@@ -53,7 +53,6 @@ public class PlayerController : MonoBehaviour
             {
                 _lookDirection.Set(move.x, move.y);
                 _lookDirection.Normalize();
-                AudioManager.Instance.PlaySound(_footsteps[Random.Range(0, _footsteps.Length)]);
             }
 
             _anim.SetFloat("Look X", _lookDirection.x);
@@ -64,6 +63,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             _rb.velocity = Vector2.zero;
+            AudioManager.Instance.StopSound();
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -77,6 +77,12 @@ public class PlayerController : MonoBehaviour
                 ReenablePlayerMovement();
             }
         }
+    }
+
+    public void FootstepEvent(int clip)
+    {
+        AudioManager.Instance.PlayFootstepSound(_footsteps, clip);
+        Debug.Log("Clip: " + clip);
     }
 
     void DisablePlayerMovement()
