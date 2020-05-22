@@ -9,7 +9,7 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private TextMeshProUGUI _timeText;
     [SerializeField] private GameObject _keyPadUI;
     [SerializeField] private GameObject _pauseMenu;
-    [SerializeField] private GameObject _optionsMenu;
+    [SerializeField] private GameObject _optionsMenu;    
 
     public delegate void OnResumeButtonClicked();
     public static event OnResumeButtonClicked onResumeButtonClicked;
@@ -79,6 +79,8 @@ public class UIManager : MonoSingleton<UIManager>
         Application.Quit();
     }
     #endregion
+
+
 
     void OnDisable()
     {

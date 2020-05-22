@@ -33,9 +33,15 @@ public class PlayerController : MonoBehaviour
         _anim = GetComponent<Animator>();
         _lookDirection = new Vector2(0, -1);
         _audio = GetComponent<AudioSource>();
+
         if (_rb == null)
         {
             Debug.LogError("The Player Rigidbody is NULL.");
+        }
+
+        if (_anim == null)
+        {
+            Debug.LogError("The Player Animator is NULL.");
         }
     }
 
