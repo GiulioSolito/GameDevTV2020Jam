@@ -23,7 +23,10 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void UpdateTimeTextUI(int time)
     {
-        _timeText.text = "Time: " + time;
+        int minutes = Mathf.FloorToInt(time / 60f);
+        int seconds = Mathf.FloorToInt(time - minutes * 60);
+        string timeRemaining = string.Format("{0:00}:{1:00}", minutes, seconds);
+        _timeText.text = timeRemaining;
     }
 
     public void ShowKeypadUI()
