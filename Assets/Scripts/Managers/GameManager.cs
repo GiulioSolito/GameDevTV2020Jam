@@ -8,7 +8,8 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] private int _timeRemaining = 300;
 
     private bool _decreaseTime = true;
-    private bool _isGameOver = false;
+
+    public bool IsGameOver { get; private set; }
 
     void OnEnable()
     {
@@ -29,18 +30,28 @@ public class GameManager : MonoSingleton<GameManager>
     {
         while (_decreaseTime)
         {
-            if (_timeRemaining <= 0)
+            _timeRemaining--;
+            UIManager.Instance.UpdateTimeTextUI(_timeRemaining);
+            yield return new WaitForSeconds(1f);
+
+            switch (_timeRemaining)
             {
-                _decreaseTime = false;
-                _timeRemaining = 0;
-                Debug.Log("GAME OVER!");
+                case 60:
+                    AudioManager.Instance.PlayMusic(1);
+                    break;
+                case 30:
+                    AudioManager.Instance.PlayMusic(2);
+                    break;
+                case 11:
+                    AudioManager.Instance.PlayMusic(3);
+                    break;
+                case 0:
+                    _decreaseTime = false;
+                    _timeRemaining = 0;
+                    AudioManager.Instance.PlayMusic(4);
+                    GameOver();
+                    break;
             }
-            else
-            {
-                _timeRemaining--;
-                UIManager.Instance.UpdateTimeTextUI(_timeRemaining);
-                yield return new WaitForSeconds(1f);
-            }            
         }
     }
 
@@ -54,13 +65,22 @@ public class GameManager : MonoSingleton<GameManager>
         Time.timeScale = 1;
     }
 
+    void GameOver()
+    {
+        IsGameOver = true;
+        Time.timeScale = 0;
+        UIManager.Instance.ShowGameOver();
+    }
+
     public void RestartLevel()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void LoadNextLevel()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

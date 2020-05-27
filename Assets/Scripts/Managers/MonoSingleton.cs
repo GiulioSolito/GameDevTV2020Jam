@@ -19,7 +19,6 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
     void Awake()
     {
         _instance = this as T;
-        DontDestroyOnLoad(this);
     }
 
     public virtual void Init() { }

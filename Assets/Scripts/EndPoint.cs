@@ -8,7 +8,8 @@ public class EndPoint : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            GameManager.Instance.LoadNextLevel();
+            //GameManager.Instance.LoadNextLevel();
+            UIManager.Instance.ShowWinScreen();
         }
     }
 }

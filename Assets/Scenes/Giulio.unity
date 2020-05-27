@@ -1959,6 +1959,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Audio Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 702767518034022008, guid: 81889f052a0933d4a97779d9fbf9b4d0,
+        type: 3}
+      propertyPath: _bgmClips.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 702767518034022008, guid: 81889f052a0933d4a97779d9fbf9b4d0,
+        type: 3}
+      propertyPath: _bgmClips.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4fb13c7be1a7e1e4185dcbb3f15d81bf, type: 3}
     - target: {fileID: 702767518034022009, guid: 81889f052a0933d4a97779d9fbf9b4d0,
         type: 3}
       propertyPath: m_LocalPosition.x

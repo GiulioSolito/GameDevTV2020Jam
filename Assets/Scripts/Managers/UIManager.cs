@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoSingleton<UIManager>
 {
@@ -10,6 +11,8 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private GameObject _keyPadUI;
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private GameObject _optionsMenu;    
+    [SerializeField] private GameObject _gameOverScreen;    
+    [SerializeField] private GameObject _winScreen;    
 
     public delegate void OnResumeButtonClicked();
     public static event OnResumeButtonClicked onResumeButtonClicked;
@@ -83,7 +86,33 @@ public class UIManager : MonoSingleton<UIManager>
     }
     #endregion
 
+    #region Game Over
+    public void RetryGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
+    }
 
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+    #endregion
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void ShowGameOver()
+    {
+        _gameOverScreen.SetActive(true);
+    }
+
+    public void ShowWinScreen()
+    {
+        _winScreen.SetActive(true);
+    }
 
     void OnDisable()
     {
