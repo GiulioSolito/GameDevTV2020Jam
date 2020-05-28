@@ -275,3 +275,5 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9b379190342e070428f891427d5d5574, type: 3}
   - {fileID: 8300000, guid: 0994fe8f4cc08b64a99317080308d36c, type: 3}
   - {fileID: 8300000, guid: dedd67a676c9d3345b4af7e93b2921da, type: 3}
+  - {fileID: 8300000, guid: 4fb13c7be1a7e1e4185dcbb3f15d81bf, type: 3}
+  _pauseClip: {fileID: 8300000, guid: 53bc80af2f874374e8810f6f9cf92be6, type: 3}

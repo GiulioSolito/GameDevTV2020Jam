@@ -101,6 +101,11 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void StartGame()
     {
+        SceneManager.LoadScene(2);
+    }
+
+    public void Credits()
+    {
         SceneManager.LoadScene(1);
     }
 
