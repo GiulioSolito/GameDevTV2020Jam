@@ -5,15 +5,15 @@ using TMPro;
 
 public class Keypad : MonoSingleton<Keypad>
 {
-    [SerializeField] private string _codeToUnlock = "0000";         //TODO: Change to private later, no need to see it
-    [SerializeField] private string _codeEntered;                   //TODO: Change to private later, no need to see it
+    private string _codeToUnlock = "0000";         
+    private string _codeEntered;                   
     [SerializeField] private TextMeshProUGUI _codeText;
     [SerializeField] private int _maxAllowedNumbers = 4;            //How long we want the key code to be
 
     public delegate void OnCorrectCodeEntered();
     public static event OnCorrectCodeEntered _OnCorrectCodeEntered;
 
-    public bool _correctCodeEntered = false;
+    private bool _correctCodeEntered = false;
 
     // Start is called before the first frame update
     void OnEnable()

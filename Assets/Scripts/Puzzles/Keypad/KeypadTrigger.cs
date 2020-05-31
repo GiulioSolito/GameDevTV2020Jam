@@ -34,7 +34,6 @@ public class KeypadTrigger : Puzzle
     {
         AudioManager.Instance.PlaySound(doorOpenSound);
         base.OpenDoor();
-        Debug.Log("Correct code entered! Opening Door");
         UIManager.Instance.HideKeypadUI();
     }
 

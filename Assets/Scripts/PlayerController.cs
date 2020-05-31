@@ -12,9 +12,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rb;
     private Animator _anim;
     private Vector2 _lookDirection;
-    private AudioSource _audio;
 
-    public bool canMove = true;
+    private bool canMove = true;
 
     public delegate void OnPauseGame();
     public static event OnPauseGame onPauseGame;
@@ -32,7 +31,6 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         _lookDirection = new Vector2(0, -1);
-        _audio = GetComponent<AudioSource>();
 
         if (_rb == null)
         {
