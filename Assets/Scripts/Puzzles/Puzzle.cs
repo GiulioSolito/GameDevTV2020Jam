@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Puzzle : MonoBehaviour
 {
-    [SerializeField] protected string _codeToUnlock = "0000";
+    [SerializeField] protected string _codeToUnlock = "";
     [SerializeField] protected string _codeEntered;
     [SerializeField] protected GameObject _doorToOpen;
 

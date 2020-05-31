@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class KeypadTrigger : Puzzle
 {
+    [SerializeField] private AudioClip doorOpenSound;
     void OnEnable()
     {
         Keypad._OnCorrectCodeEntered += OpenDoor;
@@ -31,6 +32,7 @@ public class KeypadTrigger : Puzzle
 
     public override void OpenDoor()
     {
+        AudioManager.Instance.PlaySound(doorOpenSound);
         base.OpenDoor();
         Debug.Log("Correct code entered! Opening Door");
         UIManager.Instance.HideKeypadUI();
