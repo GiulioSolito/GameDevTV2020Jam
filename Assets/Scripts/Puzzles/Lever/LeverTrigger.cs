@@ -10,6 +10,7 @@ public class LeverTrigger : Puzzle
 
     [SerializeField] private AudioClip _correctSoundClip;
     [SerializeField] private AudioClip _inCorrectSoundClip;
+    [SerializeField] private AudioClip victory;
 
     void OnEnable()
     {
@@ -63,6 +64,7 @@ public class LeverTrigger : Puzzle
         if (_codeEntered == _codeToUnlock)
         {
             Debug.Log("Correct lever order: Openening Door");
+            AudioManager.Instance.PlaySound(victory);
             OpenDoor();
         }
     }
